@@ -1,4 +1,5 @@
-const { School, Teacher, Student, Class, Lecture, Topic, Quiz, Score, Message } = require('./orm.js');
+const { School, Teacher, Student, Class, Lecture, Topic, Quiz, Score, StudentClass } = require('./orm.js');
+
 
 schoolData = [
   {name: "East High"},
@@ -15,154 +16,210 @@ teacherData = [
 ];
 
 studentData = [
-  {name: "Timmy", school_id: 1},
-  {name: "Calvin", school_id: 2},
-  {name: "Brynn", school_id: 3},
-  {name: "Ashley", school_id: 2},
-  {name: "Melissa", school_id: 1}
+  {name: "Timmy", schoolId: 1},
+  {name: "Calvin", schoolId: 2},
+  {name: "Brynn", schoolId: 3},
+  {name: "Ashley", schoolId: 2},
+  {name: "Melissa", schoolId: 1}
 ];
 
 classData = [
-  {name: "science", school_id: 1, teacher_id: 1},
-  {name: "english", school_id: 2, teacher_id: 2},
-  {name: "math", school_id: 3, teacher_id: 3},
-  {name: "psychology", school_id: 2, teacher_id: 4},
-  {name: "history", school_id: 1, teacher_id: 5},
-  {name: "social studies", school_id: 1, teacher_id: 5},
-  {name: "music", school_id: 1, teacher_id: 1}
+  {name: "science", schoolId: 1, teacherId: 1},
+  {name: "english", schoolId: 2, teacherId: 2},
+  {name: "math", schoolId: 3, teacherId: 3},
+  {name: "psychology", schoolId: 2, teacherId: 4},
+  {name: "history", schoolId: 1, teacherId: 5},
+  {name: "social studies", schoolId: 1, teacherId: 5},
+  {name: "music", schoolId: 1, teacherId: 1}
 ];
 
 lectureData = [
-  {name: "biology", class_id: 1}, 
-  {name: "shakespeare", class_id: 2},
-  {name: "geometry", class_id: 3},
-  {name: "childhood development", class_id: 4}, 
-  {name: "20th century", class_id: 5}, 
-  {name: "US Government", class_id: 6}, 
-  {name: "modern era", class_id: 7}
+  {name: "biology", classId: 1}, 
+  {name: "shakespeare", classId: 2},
+  {name: "geometry", classId: 3},
+  {name: "childhood development", classId: 4}, 
+  {name: "20th century", classId: 5}, 
+  {name: "US Government", classId: 6}, 
+  {name: "modern era", classId: 7}
 ];
 
 topicData = [
-  {name: "cell division", lecture_id: 1},
-  {name: "Two Men of Verona", lecture_id: 2},
-  {name: "squares", lecture_id: 3}, 
-  {name: "Maslow", lecture_id: 4}, 
-  {name: "World War 2", lecture_id: 5}, 
-  {name: "Congress", lecture_id: 6}, 
-  {name: "Steve Reich", lecture_id: 7},
+  {name: "cell division", lectureId: 1},
+  {name: "Two Men of Verona", lectureId: 2},
+  {name: "squares", lectureId: 3}, 
+  {name: "Maslow", lectureId: 4}, 
+  {name: "World War 2", lectureId: 5}, 
+  {name: "Congress", lectureId: 6}, 
+  {name: "Steve Reich", lectureId: 7},
 ];
 
 quizData = [
-  {name: "mitosis", topic_id: 1}, 
-  {name: "Characters in Two Men of Verona", topic_id: 2}, 
-  {name: "How many sides do they have?", topic_id: 3}, 
-  {name: "Hierarchy of Needs", topic_id: 4}, 
-  {name: "The Western Front", topic_id: 5}, 
-  {name: "The Pacific", topic_id: 5}, 
-  {name: "Are all the sides the same length?", topic_id: 3}, 
-  {name: "Powers of Congress", topic_id: 6}, 
-  {name: "Different Trains", topic_id: 7}, 
-  {name: "Electric Counterpoint", topic_id: 7}
+  {name: "mitosis", topicId: 1}, 
+  {name: "Characters in Two Men of Verona", topicId: 2}, 
+  {name: "How many sides do they have?", topicId: 3}, 
+  {name: "Hierarchy of Needs", topicId: 4}, 
+  {name: "The Western Front", topicId: 5}, 
+  {name: "The Pacific", topicId: 5}, 
+  {name: "Are all the sides the same length?", topicId: 3}, 
+  {name: "Powers of Congress", topicId: 6}, 
+  {name: "Different Trains", topicId: 7}, 
+  {name: "Electric Counterpoint", topicId: 7}
 ];
 
 scoreData = [
-  {grade: 91, student_id: 1, quiz_id: 1}, 
-  {grade: 93, student_id: 2, quiz_id: 1}, 
-  {grade: 81, student_id: 3, quiz_id: 2}, 
-  {grade: 88, student_id: 4, quiz_id: 2}, 
-  {grade: 94, student_id: 5, quiz_id: 3}, 
-  {grade: 82, student_id: 1, quiz_id: 4}, 
-  {grade: 78, student_id: 2, quiz_id: 8}, 
-  {grade: 99, student_id: 3, quiz_id: 4}, 
-  {grade: 87, student_id: 4, quiz_id: 1}, 
-  {grade: 92, student_id: 5, quiz_id: 7}, 
-  {grade: 92, student_id: 5, quiz_id: 5}, 
-  {grade: 97, student_id: 5, quiz_id: 6}, 
-  {grade: 79, student_id: 4, quiz_id: 9}, 
-  {grade: 83, student_id: 4, quiz_id: 10}, 
-  {grade: 80, student_id: 3, quiz_id: 9}, 
-  {grade: 94, student_id: 3, quiz_id: 10}, 
-  {grade: 90, student_id: 2, quiz_id: 5}, 
-  {grade: 86, student_id: 2, quiz_id: 6}, 
-  {grade: 87, student_id: 1, quiz_id: 3}, 
-  {grade: 96, student_id: 1, quiz_id: 7}
+  {grade: 91, studentId: 1, quizId: 1}, 
+  {grade: 93, studentId: 2, quizId: 1}, 
+  {grade: 81, studentId: 3, quizId: 2}, 
+  {grade: 88, studentId: 4, quizId: 2}, 
+  {grade: 94, studentId: 5, quizId: 3}, 
+  {grade: 82, studentId: 1, quizId: 4}, 
+  {grade: 78, studentId: 2, quizId: 8}, 
+  {grade: 99, studentId: 3, quizId: 4}, 
+  {grade: 87, studentId: 4, quizId: 1}, 
+  {grade: 92, studentId: 5, quizId: 7}, 
+  {grade: 92, studentId: 5, quizId: 5}, 
+  {grade: 97, studentId: 5, quizId: 6}, 
+  {grade: 79, studentId: 4, quizId: 9}, 
+  {grade: 83, studentId: 4, quizId: 10}, 
+  {grade: 80, studentId: 3, quizId: 9}, 
+  {grade: 94, studentId: 3, quizId: 10}, 
+  {grade: 90, studentId: 2, quizId: 5}, 
+  {grade: 86, studentId: 2, quizId: 6}, 
+  {grade: 87, studentId: 1, quizId: 3}, 
+  {grade: 96, studentId: 1, quizId: 7}
+];
+
+studentClassData = [
+  {studentId: 1, classId: 1}, 
+  {studentId: 2, classId: 1}, 
+  {studentId: 4, classId: 1}, 
+  {studentId: 3, classId: 2}, 
+  {studentId: 4, classId: 2}, 
+  {studentId: 5, classId: 3}, 
+  {studentId: 1, classId: 3}, 
+  {studentId: 1, classId: 4}, 
+  {studentId: 3, classId: 4}, 
+  {studentId: 2, classId: 5}, 
+  {studentId: 5, classId: 5}, 
+  {studentId: 2, classId: 6}, 
+  {studentId: 3, classId: 7}, 
+  {studentId: 4, classId: 7}
 ]
 
+// School.sync({force: false}).then(() => {
+  // return School.bulkCreate(schoolData)
+  // .then(() => {
+  //   console.log('updated schools')
+  // })
+// })
+// .then(() => {return createTeacherssTable()})
+// .then(() => {return createStudentsTable()})
+// .then(() => {return createClassessTable()})
+// .then(() => {return createLecturesTable()})
+// .then(() => {return createTopicsTable()})
+// .then(() => {return createQuizesTable()})
+// .then(() => {return createScoreTable()})
 
-School.sync({force: false}).then(() => {
-  return School.bulkCreate(schoolData)
+School.bulkCreate(schoolData)
   .then(() => {
-    console.log('updated schools')
+    console.log('updated schools');
+    Teacher.bulkCreate(teacherData)
+      .then(() => {
+        console.log('updated teachers');
+        Student.bulkCreate(studentData)
+          .then(() => {
+            console.log('updated students');
+            Class.bulkCreate(classData)
+              .then(() => {
+                console.log('updated classes');
+                Lecture.bulkCreate(lectureData)
+                  .then(() => {
+                    console.log('updated lectures');
+                    Topic.bulkCreate(topicData)
+                      .then(() => {
+                        console.log('updated topics');
+                        Quiz.bulkCreate(quizData)
+                          .then(() => {
+                            console.log('updated quizes');
+                            Score.bulkCreate(scoreData)
+                              .then(() => {
+                                console.log('updated scores');
+                                StudentClass.bulkCreate(studentClassData)
+                                  .then(() => {
+                                    console.log('updated studentClass');
+                                  });
+                              });
+                          });
+                      });
+                  });
+              });
+          });
+      });
   })
-})
-.then(() => {return createTeacherssTable()})
-.then(() => {return createStudentsTable()})
-.then(() => {return createClassessTable()})
-.then(() => {return createLecturesTable()})
-.then(() => {return createTopicsTable()})
-.then(() => {return createQuizesTable()})
-.then(() => {return createScoreTable()})
-
-const createTeacherssTable = () => {
-  Teacher.sync({force: false}).then(() => {
-    return Teacher.bulkCreate(teacherData)
-      .then(() => {
-        console.log('updated teachers')
-      })
+  .catch((err) => {
+    console.log('failed inserting dummy data');
   });
-}
 
-const createStudentsTable = () => {
-  Student.sync({force: false}).then(() => {
-    return Student.bulkCreate(studentData)
-      .then(() => {
-        console.log('updated students')
-      })
-  });
-}
+// const createTeacherssTable = () => {
+//   Teacher.sync({force: false}).then(() => {
+//     return Teacher.bulkCreate(teacherData)
+//       .then(() => {
+//         console.log('updated teachers')
+//       })
+//   });
+// }
 
-const createClassessTable = () => {
-  Class.sync({force: false}).then(() => {
-    return Class.bulkCreate(classData)
-      .then(() => {
-        console.log('updated classes')
-      })
-  });
-}
+// const createStudentsTable = () => {
+//   Student.sync({force: false}).then(() => {
+//     return Student.bulkCreate(studentData)
+//       .then(() => {
+//         console.log('updated students')
+//       })
+//   });
+// }
 
-const createLecturesTable = () => {
-  Lecture.sync({force: false}).then(() => {
-    return Lecture.bulkCreate(lectureData)
-      .then(() => {
-        console.log('updated lectures')
-      })
-  });
-}
+// const createClassessTable = () => {
+//   Class.sync({force: false}).then(() => {
+//     return Class.bulkCreate(classData)
+//       .then(() => {
+//         console.log('updated classes')
+//       })
+//   });
+// }
 
-const createTopicsTable = () => {
-  Topic.sync({force: false}).then(() => {
-    return Topic.bulkCreate(topicData)
-      .then(() => {
-        console.log('updated topics')
-      })
-  });
-}
+// const createLecturesTable = () => {
+//   Lecture.sync({force: false}).then(() => {
+//     return Lecture.bulkCreate(lectureData)
+//       .then(() => {
+//         console.log('updated lectures')
+//       })
+//   });
+// }
 
-const createQuizesTable = () => {
-  Quiz.sync({force: false}).then(() => {
-    return Quiz.bulkCreate(quizData)
-      .then(() => {
-        console.log('updated quizes')
-      })
-  });
-}
+// const createTopicsTable = () => {
+//   Topic.sync({force: false}).then(() => {
+//     return Topic.bulkCreate(topicData)
+//       .then(() => {
+//         console.log('updated topics')
+//       })
+//   });
+// }
 
-const createScoreTable = () => {
-  Score.sync({force: false}).then(() => {
-    return Score.bulkCreate(scoreData)
-      .then(() => {
-        console.log('updated scores')
-      })
-  });
-}
+// const createQuizesTable = () => {
+//   Quiz.sync({force: false}).then(() => {
+//     return Quiz.bulkCreate(quizData)
+//       .then(() => {
+//         console.log('updated quizes')
+//       })
+//   });
+// }
+
+// const createScoreTable = () => {
+//   Score.sync({force: false}).then(() => {
+//     return Score.bulkCreate(scoreData)
+//       .then(() => {
+//         console.log('updated scores')
+//       })
+//   });
+// }
 
