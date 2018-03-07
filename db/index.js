@@ -5,7 +5,7 @@ const orm = require('./orm.js');
 //     console.log('connected');
 //   })
 //   .catch(() => {
-//     console.log('u stupid');
+//     console.log('error, could not connect to db');
 //   });
 
 // var user = 'root';
