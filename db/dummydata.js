@@ -117,7 +117,7 @@ studentClassData = [
 // .then(() => {return createClassessTable()})
 // .then(() => {return createLecturesTable()})
 // .then(() => {return createTopicsTable()})
-// .then(() => {return createQuizesTable()})
+// .then(() => {return createQuizzesTable()})
 // .then(() => {return createScoreTable()})
 
 School.bulkCreate(schoolData)
@@ -140,7 +140,7 @@ School.bulkCreate(schoolData)
                         console.log('updated topics');
                         Quiz.bulkCreate(quizData)
                           .then(() => {
-                            console.log('updated quizes');
+                            console.log('updated quizzes');
                             Score.bulkCreate(scoreData)
                               .then(() => {
                                 console.log('updated scores');
@@ -205,11 +205,11 @@ School.bulkCreate(schoolData)
 //   });
 // }
 
-// const createQuizesTable = () => {
+// const createQuizzesTable = () => {
 //   Quiz.sync({force: false}).then(() => {
 //     return Quiz.bulkCreate(quizData)
 //       .then(() => {
-//         console.log('updated quizes')
+//         console.log('updated quizzes')
 //       })
 //   });
 // }
