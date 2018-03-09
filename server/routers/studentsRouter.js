@@ -10,11 +10,22 @@ router.route('/')
       res.sendStatus(500);
     }
   })
-  .get((req, res) => {
-
+  .get(async (req, res) => {
+    try {
+      let students = await studentsController.getStudents()
+      res.status(200).send(students);
+    } catch (err) {
+      res.sendStatus(500);
+    }
   })
-  .delete((req, res) => {
-
+  .delete(async (req, res) => {
+    try {
+      await studentsController.deleteStudent(req.body.name);
+      alert(req.body.name, ' successfully deleted')
+      res.sendStatus(202);
+    } catch (err) {
+      res.sendStatus(500);
+    }
   })
   .put((req, res) => {
 

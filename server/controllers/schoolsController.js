@@ -15,5 +15,16 @@ module.exports = {
     } catch (err) {
       throw err;
     }
+  },
+  deleteSchool: async (name) => {
+    try {
+      School.destroy({
+        where: {
+          name: name
+        }});
+      alert(name, ' was deleted')
+    } catch (err) {
+      throw err;
+    }
   }
 };

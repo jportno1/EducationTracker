@@ -15,5 +15,17 @@ module.exports = {
     } catch (err) {
       throw err;
     }
+  }, 
+  deleteQuiz: async (name) => {
+    try {
+      await Quiz.destroy({
+        where: {
+          name: name
+        }
+      })
+      alert(name, ' was deleted')
+    } catch (err) {
+      throw err;
+    }
   }
 };

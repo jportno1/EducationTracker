@@ -8,7 +8,7 @@ const topicsRouter = require('./routers/topicsRouter.js');
 const quizzesRouter = require('./routers/quizzesRouter.js');
 const scoresRouter = require('./routers/scoresRouter.js');
 const studentClassesRouter = require('./routers/studentClassesRouter.js');
-
+const usersRouter = require('./routers/usersRouter.js');
 
 router.use('/schools', schoolsRouter);
 router.use('/teachers', teachersRouter);
@@ -19,9 +19,11 @@ router.use('/topics', topicsRouter);
 router.use('/quizzes', quizzesRouter);
 router.use('/scores', scoresRouter);
 router.use('/studentClasses', studentClassesRouter);
+router.use('/auth', usersRouter);
 
+// router.get('/allStudents', (req, res) => {
 
-
+// });
 
 
 

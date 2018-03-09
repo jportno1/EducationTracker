@@ -2,7 +2,7 @@
 angular.module('edtechApp')
 .component('login', {
   controller: function($http) {
-    var ctrl = this;
+    let ctrl = this;
     this.username = '';
     this.password = '';
     this.username2 = '';

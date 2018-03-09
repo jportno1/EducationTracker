@@ -10,11 +10,22 @@ router.route('/')
       res.sendStatus(500);
     }
   })
-  .get((req, res) => {
-
+  .get(async (req, res) => {
+    try {
+      let quizzes = await quizzesController.getQuizzes();
+      res.status(200).send(quizzes)
+    } catch (err) {
+      res.sendStatus(500);
+    }
   })
-  .delete((req, res) => {
 
+  .delete(async (req, res) => {
+    try {
+      await quizzesController.deleteQuiz(req.body.name);
+      res.sendStatus(202);
+    } catch (err) {
+      res.sendStatus(500);
+    }
   })
   .put((req, res) => {
 

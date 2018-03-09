@@ -5,19 +5,28 @@ router.route('/')
   .post(async (req, res) => {
     try {
       await schoolsController.addSchool(req.body.name);
-      res.sendStatus(200);
+      res.sendStatus(201);
     } catch (err) {
       res.sendStatus(500);
     }
   })
-  .get((req, res) => {
 
+  .get(async (req, res) => {
+    try {
+      let schools = await schoolsController.getSchools();
+      res.status(200).send(schools)
+    } catch (err) {
+      res.sendStatus(500);
+    }
   })
-  .delete((req, res) => {
 
+  .delete(async (req, res) => {
+    try {
+      await schoolsController.deleteSchool(req.body.name);
+      res.sendStatus(202);
+    } catch (err) {
+      res.sendStatus(500);
+    }
   })
-  .put((req, res) => {
-
-  });
 
 module.exports = router;

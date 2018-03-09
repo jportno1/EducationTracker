@@ -7,7 +7,7 @@ angular.module('edtechApp')
   template:
   `
   <div>
-  
+    
     <div>
       <h3>List of Classes</h3>
       <classlist></classlist>

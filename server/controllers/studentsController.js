@@ -15,5 +15,17 @@ module.exports = {
     } catch (err) {
       throw err;
     }
+  },
+  deleteStudent: async (name) => {
+    try {
+      await Student.destroy({
+        where: {
+          name: name
+        }
+      })
+      alert(name, ' was deleted')
+    } catch (err) {
+      throw err;
+    }
   }
 };
