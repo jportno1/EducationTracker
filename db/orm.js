@@ -1,4 +1,5 @@
 const Sequelize = require('sequelize');
+const bcrypt = require('bcrypt');
 
 
 const sequelize = new Sequelize('edtech', 'root', '', {
@@ -103,43 +104,73 @@ const Score = sequelize.define('score', {
   grade: Sequelize.INTEGER
 });
 
-const Message = sequelize.define('message', {
-  id: {
-    type: Sequelize.INTEGER,
-    primaryKey: true,
-    autoIncrement: true
+const StudentClass = sequelize.define('studentClass', {});
+
+const User = sequelize.define('user', {
+  username: {
+    type: Sequelize.STRING,
+    unique: true,
+    allowNull: false
   },
-  text: Sequelize.STRING,
-  time: {
-    type: Sequelize.DATE,
-    defaultValue: Sequelize.NOW
+  password: {
+    type: Sequelize.STRING,
+    allowNull: false
   }
-});
+}//, {
+  // hooks: {
+  //   beforeCreate: (user) => {
+  //     const salt = bcrypt.hashSync(user.password, salt);
+  //   }
+  // }
+//}
+);
+
+
+
+User.prototype.validPassword = (hashedPassword, password) => {
+  return bcrypt.compare(password, hashedPassword);
+}
+
+// const Message = sequelize.define('message', {
+//   id: {
+//     type: Sequelize.INTEGER,
+//     primaryKey: true,
+//     autoIncrement: true
+//   },
+//   text: Sequelize.STRING,
+//   time: {
+//     type: Sequelize.DATE,
+//     defaultValue: Sequelize.NOW
+//   }
+// });
 
 Teacher.belongsTo(School);
-School.hasMany(Teacher);
 Student.belongsTo(School);
-School.hasMany(Student);
-Student.hasMany(Class);
-Class.hasMany(Student);
 Class.belongsTo(School);
 Class.belongsTo(Teacher);
-School.hasMany(Class);
-Teacher.hasMany(Class);
 Lecture.belongsTo(Class);
-Class.hasMany(Lecture);
 Topic.belongsTo(Lecture);
-Lecture.hasMany(Topic);
 Quiz.belongsTo(Topic);
-Topic.hasMany(Quiz);
 Score.belongsTo(Quiz);
 Score.belongsTo(Student);
-Student.hasMany(Score);
-Quiz.hasMany(Score);
-Message.belongsTo(Student);
-Message.belongsTo(Teacher);
-Student.hasMany(Message);
-Teacher.hasMany(Message);
+StudentClass.belongsTo(Class);
+StudentClass.belongsTo(Student);
+
+// School.hasMany(Teacher);
+// School.hasMany(Student);
+// Student.hasMany(Class);
+// Class.hasMany(Student);
+// School.hasMany(Class);
+// Teacher.hasMany(Class);
+// Class.hasMany(Lecture);
+// Lecture.hasMany(Topic);
+// Topic.hasMany(Quiz);
+// Student.hasMany(Score);
+// Quiz.hasMany(Score);
+// Message.belongsTo(Student);
+// Message.belongsTo(Teacher);
+// Student.hasMany(Message);
+// Teacher.hasMany(Message);
 
 sequelize.authenticate().then(function() {
   console.log('You are connected to edtech Database on localhost');
@@ -155,5 +186,7 @@ module.exports.Lecture = Lecture;
 module.exports.Topic = Topic;
 module.exports.Quiz = Quiz;
 module.exports.Score = Score;
-module.exports.Message = Message;
+module.exports.StudentClass = StudentClass;
+module.exports.User = User;
+// module.exports.Message = Message;
 module.exports.sequelize = sequelize;

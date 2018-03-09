@@ -1,12 +1,17 @@
-const mysql = require('mysql');
-const orm = require('./orm.js');
-// orm.sequelize.sync()
-//   .then(() => {
-//     console.log('connected');
-//   })
-//   .catch(() => {
-//     console.log('error, could not connect to db');
-//   });
+// const mysql = require('mysql');
+
+const db = require('./orm.js');
+// const models = require('...models');
+const { School, Teacher, Student, Class, Lecture, Topic, Quiz, Score, Message, StudentClass, User } = require('./orm.js');
+
+
+db.sequelize.sync({force: true})
+  .then(() => {
+    console.log('connected');
+  })
+  .catch(() => {
+    console.log('error, could not connect to db');
+  });
 
 // var user = 'root';
 // var password = '';
