@@ -1,4 +1,5 @@
 const Sequelize = require('sequelize');
+const bcrypt = require('bcrypt');
 
 
 const sequelize = new Sequelize('edtech', 'root', '', {
@@ -105,6 +106,31 @@ const Score = sequelize.define('score', {
 
 const StudentClass = sequelize.define('studentClass', {});
 
+const User = sequelize.define('user', {
+  username: {
+    type: Sequelize.STRING,
+    unique: true,
+    allowNull: false
+  },
+  password: {
+    type: Sequelize.STRING,
+    allowNull: false
+  }
+}//, {
+  // hooks: {
+  //   beforeCreate: (user) => {
+  //     const salt = bcrypt.hashSync(user.password, salt);
+  //   }
+  // }
+//}
+);
+
+
+
+User.prototype.validPassword = (hashedPassword, password) => {
+  return bcrypt.compare(password, hashedPassword);
+}
+
 // const Message = sequelize.define('message', {
 //   id: {
 //     type: Sequelize.INTEGER,
@@ -161,5 +187,6 @@ module.exports.Topic = Topic;
 module.exports.Quiz = Quiz;
 module.exports.Score = Score;
 module.exports.StudentClass = StudentClass;
+module.exports.User = User;
 // module.exports.Message = Message;
 module.exports.sequelize = sequelize;

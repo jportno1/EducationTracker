@@ -2,7 +2,7 @@
 
 const db = require('./orm.js');
 // const models = require('...models');
-const { School, Teacher, Student, Class, Lecture, Topic, Quiz, Score, Message, StudentClass } = require('./orm.js');
+const { School, Teacher, Student, Class, Lecture, Topic, Quiz, Score, Message, StudentClass, User } = require('./orm.js');
 
 
 db.sequelize.sync({force: true})
