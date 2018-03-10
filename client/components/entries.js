@@ -59,7 +59,28 @@ angular.module('edtechApp')
         .catch((err) => {
           console.log('something went wrong when deleting')
         })
-    }
+    };
+
+    this.addTeacher = () => {
+      let { id } = $http.get('/api/schools', { params { name: this.schoolName}})
+      $http.post('/api/teachers', { name: this.teacherName, schoolId: id})
+        .then(() => {
+          alert('successfully saved ', this.teacherName)
+        })
+        .catch((err) => {
+          console.log('something went wrong when saving to database')
+        });
+    };
+
+    this.deleteSchool = () => {
+      $http.delete('/api/schools', { params: {name: this.schoolName}})
+        .then(() => {
+          alert('successfully deleted ', this.schoolName)
+        })
+        .catch((err) => {
+          console.log('something went wrong when deleting')
+        })
+    };
 
   },
 

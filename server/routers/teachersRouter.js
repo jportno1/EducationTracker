@@ -20,8 +20,7 @@ router.route('/')
   })
   .delete(async (req, res) => {
     try {
-      await teachersController.deleteTeacher(req.body.name);
-      alert(req.body.name, ' successfully deleted')
+      await teachersController.deleteTeacher(req.query.name);
       res.sendStatus(202);
     } catch (err) {
       res.sendStatus(500);
