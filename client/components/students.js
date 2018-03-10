@@ -32,7 +32,7 @@ angular.module('edtechApp')
   template: 
   `
   <div>
-    <h2>students component</h2>
+    <h2>Students</h2>
     <div ng-repeat='student in $ctrl.students' >
       <h5 ng-click='$ctrl.showStudentDetails(student.name)' >{{student.name}}</h5>
     </div>
