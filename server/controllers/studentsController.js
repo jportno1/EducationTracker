@@ -8,12 +8,19 @@ module.exports = {
       throw err;
     }
   },
-  // getStudentId: async (student)
   getStudents: async (className) => {
     try {
       let classId = await Class.findOne({ where: {name: className}});
       let studentsIds = await StudentClass.findAll( {where: {classId: classId.dataValues.id}})
       return studentsIds;
+    } catch (err) {
+      throw err;
+    }
+  },
+  getStudentId: async (name) => {
+    try {
+      let studentsIds = await Student.findOne( {where: {name: name}})
+      return studentsIds.id;
     } catch (err) {
       throw err;
     }

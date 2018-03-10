@@ -7,27 +7,9 @@ const sequelize = new Sequelize('edtech', 'root', '', {
   dialect: 'mysql',
 });
 
-// var user = 'root';
-// var password = '';
-// var db = 'edtech';
 
-// var connection = mysql.createConnection({
 
-//   host: 'localhost',
-//   user: user,
-//   password: password,
-//   database: db
-
-// });
-
-// connection.connect(function(err) {
-//   if(err) {
-//     return console.log('There was an error: ', err)
-//   };
-//   console.log('Now connected to ', db);
-// });
-
-//schemas
+//schema
 
 const School = sequelize.define('school', {
   id: {
@@ -131,18 +113,7 @@ User.prototype.validPassword = (hashedPassword, password) => {
   return bcrypt.compare(password, hashedPassword);
 }
 
-// const Message = sequelize.define('message', {
-//   id: {
-//     type: Sequelize.INTEGER,
-//     primaryKey: true,
-//     autoIncrement: true
-//   },
-//   text: Sequelize.STRING,
-//   time: {
-//     type: Sequelize.DATE,
-//     defaultValue: Sequelize.NOW
-//   }
-// });
+
 
 Teacher.belongsTo(School);
 Student.belongsTo(School);
@@ -156,21 +127,7 @@ Score.belongsTo(Student);
 StudentClass.belongsTo(Class);
 StudentClass.belongsTo(Student);
 
-// School.hasMany(Teacher);
-// School.hasMany(Student);
-// Student.hasMany(Class);
-// Class.hasMany(Student);
-// School.hasMany(Class);
-// Teacher.hasMany(Class);
-// Class.hasMany(Lecture);
-// Lecture.hasMany(Topic);
-// Topic.hasMany(Quiz);
-// Student.hasMany(Score);
-// Quiz.hasMany(Score);
-// Message.belongsTo(Student);
-// Message.belongsTo(Teacher);
-// Student.hasMany(Message);
-// Teacher.hasMany(Message);
+
 
 sequelize.authenticate().then(function() {
   console.log('You are connected to edtech Database on localhost');

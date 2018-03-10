@@ -28,7 +28,6 @@ angular.module('edtechApp')
     }
       
     this.signup = () => {
-      console.log('clicked the signup button')
       $http.post('/auth', {username: ctrl.username2, password: ctrl.password2})
       .then(() => {
         alert('Successfully signed up! Please log in.')

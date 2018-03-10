@@ -108,19 +108,7 @@ studentClassData = [
   {studentId: 4, classId: 7}
 ]
 
-// School.sync({force: false}).then(() => {
-  // return School.bulkCreate(schoolData)
-  // .then(() => {
-  //   console.log('updated schools')
-  // })
-// })
-// .then(() => {return createTeacherssTable()})
-// .then(() => {return createStudentsTable()})
-// .then(() => {return createClassessTable()})
-// .then(() => {return createLecturesTable()})
-// .then(() => {return createTopicsTable()})
-// .then(() => {return createQuizzesTable()})
-// .then(() => {return createScoreTable()})
+
 
 School.bulkCreate(schoolData)
   .then(() => {
@@ -161,67 +149,4 @@ School.bulkCreate(schoolData)
   .catch((err) => {
     console.log('failed inserting dummy data');
   });
-
-// const createTeacherssTable = () => {
-//   Teacher.sync({force: false}).then(() => {
-//     return Teacher.bulkCreate(teacherData)
-//       .then(() => {
-//         console.log('updated teachers')
-//       })
-//   });
-// }
-
-// const createStudentsTable = () => {
-//   Student.sync({force: false}).then(() => {
-//     return Student.bulkCreate(studentData)
-//       .then(() => {
-//         console.log('updated students')
-//       })
-//   });
-// }
-
-// const createClassessTable = () => {
-//   Class.sync({force: false}).then(() => {
-//     return Class.bulkCreate(classData)
-//       .then(() => {
-//         console.log('updated classes')
-//       })
-//   });
-// }
-
-// const createLecturesTable = () => {
-//   Lecture.sync({force: false}).then(() => {
-//     return Lecture.bulkCreate(lectureData)
-//       .then(() => {
-//         console.log('updated lectures')
-//       })
-//   });
-// }
-
-// const createTopicsTable = () => {
-//   Topic.sync({force: false}).then(() => {
-//     return Topic.bulkCreate(topicData)
-//       .then(() => {
-//         console.log('updated topics')
-//       })
-//   });
-// }
-
-// const createQuizzesTable = () => {
-//   Quiz.sync({force: false}).then(() => {
-//     return Quiz.bulkCreate(quizData)
-//       .then(() => {
-//         console.log('updated quizzes')
-//       })
-//   });
-// }
-
-// const createScoreTable = () => {
-//   Score.sync({force: false}).then(() => {
-//     return Score.bulkCreate(scoreData)
-//       .then(() => {
-//         console.log('updated scores')
-//       })
-//   });
-// }
 

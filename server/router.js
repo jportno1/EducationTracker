@@ -1,3 +1,4 @@
+
 const router = require('express').Router();
 const schoolsRouter = require('./routers/schoolsRouter.js');
 const teachersRouter = require('./routers/teachersRouter.js');
@@ -9,7 +10,8 @@ const quizzesRouter = require('./routers/quizzesRouter.js');
 const scoresRouter = require('./routers/scoresRouter.js');
 const studentClassesRouter = require('./routers/studentClassesRouter.js');
 const usersRouter = require('./routers/usersRouter.js');
-const {Student, Lecture, Topic, Quiz} = require('../db/orm.js');
+const {Student, Lecture, Topic, Quiz, StudentClass} = require('../db/orm.js');
+const studentsController = require('./controllers/studentsController.js')
 
 router.use('/schools', schoolsRouter);
 router.use('/teachers', teachersRouter);
@@ -39,6 +41,26 @@ router.get('/allStudents', async (req, res) => {
     res.sendStatus(500);
   }
 });
+
+router.get('/studentsId', async (req, res) => {
+  try {
+    let studentId = await studentsController.getStudentId(req.query.name)
+    res.status(200).json(studentId);
+  } catch (err) {
+    res.sendStatus(500);
+  }
+});
+
+router.get('/studentClassesById', async (req, res) => {
+  try {
+    let classIds = await StudentClass.findAll({where: {studentId: req.query.studentId}});
+    let ids = [];
+    classIds.forEach((id) => {ids.push(id.dataValues.classId)})
+    res.status(200).send(ids);
+  } catch (err) {
+    res.sendStatus(500);
+  }
+})
 
 router.get('/allTopics', async (req, res) => {
   try {
