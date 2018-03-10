@@ -21,7 +21,7 @@ router.route('/')
 
   .delete(async (req, res) => {
     try {
-      await topicsController.deleteTopic(req.body.name);
+      await topicsController.deleteTopic(req.query.name);
       res.sendStatus(202);
     } catch (err) {
       res.sendStatus(500);
