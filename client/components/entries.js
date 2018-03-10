@@ -50,6 +50,17 @@ angular.module('edtechApp')
           console.log('something went wrong when saving to database')
         });
     };
+
+    this.deleteSchool = () => {
+      $http.delete('/api/schools', { params: {name: this.schoolName}})
+        .then(() => {
+          alert('successfully deleted ', this.schoolName)
+        })
+        .catch((err) => {
+          console.log('something went wrong when deleting')
+        })
+    }
+
   },
 
   template:
@@ -61,7 +72,7 @@ angular.module('edtechApp')
     <h5 ng-click='$ctrl.toggleSchools()' >Schools</h5>
     <div ng-if='$ctrl.schools' >
       School Name: <input ng-model='$ctrl.schoolName' /> <br>
-      <button ng-click='$ctrl.addSchool()' >Add</button> <button>Delete</button>
+      <button ng-click='$ctrl.addSchool()' >Add</button> <button ng-click='$ctrl.deleteSchool()' >Delete</button>
     </div>
 
     <h5 ng-click='$ctrl.toggleTeachers()' >Teachers</h5>
