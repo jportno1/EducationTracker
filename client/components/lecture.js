@@ -9,7 +9,6 @@ angular.module('edtechApp')
     this.topics = [];
 
     this.selectLecture = (e) => {
-      console.log('select lecture!!!')
       this.selectedLecture = e;
       let lectureTopics = $http.get('/api/topics', { params: {name: this.selectedLecture}})
       .then((lectureTopics) => {

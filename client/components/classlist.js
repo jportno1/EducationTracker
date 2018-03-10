@@ -8,10 +8,8 @@ angular.module('edtechApp')
     this.studentCount = '';
 
     this.$onInit = () => {
-      console.log('onInit in classlist')
       let theClasses = $http.get('/api/classes', {})
       .then((theClasses) => {
-        console.log('this is data in onInit: ', theClasses.data)
         this.classes = theClasses.data;
       })
     }
