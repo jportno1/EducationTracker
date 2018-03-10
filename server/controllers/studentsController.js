@@ -8,6 +8,7 @@ module.exports = {
       throw err;
     }
   },
+  // getStudentId: async (student)
   getStudents: async (className) => {
     try {
       let classId = await Class.findOne({ where: {name: className}});

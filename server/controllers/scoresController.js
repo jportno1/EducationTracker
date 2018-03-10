@@ -20,12 +20,11 @@ module.exports = {
 
   deleteScore: async (studentId, quizId) => {
     try {
-      School.destroy({
+      Score.destroy({
         where: {
           studentId: studentId,
           quizId: quizId
         }});
-      alert(name, ' was deleted')
     } catch (err) {
       throw err;
     }

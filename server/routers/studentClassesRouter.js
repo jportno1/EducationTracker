@@ -18,8 +18,13 @@ router.route('/')
       res.sendStatus(500);
     }
   })
-  .delete((req, res) => {
-
+  .delete(async (req, res) => {
+    try {
+      await studentClassesController.deleteStudentClass(req.query.studentId, req.query.classId);
+      res.sendStatus(202);
+    } catch (err) {
+      res.sendStatus(500);
+    }
   })
   .put((req, res) => {
 
