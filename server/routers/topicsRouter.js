@@ -12,7 +12,7 @@ router.route('/')
   })
   .get(async (req, res) => {
     try {
-      let topics = await topicsController.getTopics(className);
+      let topics = await topicsController.getTopics(req.query.name);
       res.status(200).send(topics)
     } catch (err) {
       res.sendStatus(500);

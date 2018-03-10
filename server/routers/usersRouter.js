@@ -17,7 +17,7 @@ router.route('/')
       req.session.user = user.dataValues;
       res.sendStatus(200);
     } catch (err) {
-      res.sendStatus(500);
+      res.sendStatus(403);
     }
   })
 
