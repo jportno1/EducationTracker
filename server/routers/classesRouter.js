@@ -11,7 +11,6 @@ router.route('/')
     }
   })
   .get(async (req, res) => {
-    console.log(' inside of calss Router')
     try {
       let classes = await classesController.getClasses();
       res.status(200).send(classes);

@@ -1,4 +1,4 @@
-const { Topic, Class } = require('../../db/orm.js');
+const { Topic, Lecture } = require('../../db/orm.js');
 
 module.exports = {
   addTopic: async (name, lectureId) => {
@@ -8,10 +8,10 @@ module.exports = {
       throw err;
     }
   },
-  getTopics: async (className) => {
+  getTopics: async (lectureName) => {
     try {
-      let { id } = await Class.findOne({where: {name: className}})
-      let topics = await Topic.findAll({where: {classId: id}});
+      let { id } = await Lecture.findOne({where: {name: lectureName}});
+      let topics = await Topic.findAll({where: {lectureId: id}});
       return topics;
     } catch (err) {
       throw err;

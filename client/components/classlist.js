@@ -4,6 +4,7 @@ angular.module('edtechApp')
     let ctrl = this;
     this.classes = [];
     this.selectedClass = '';
+    this.lectures = [];
 
     this.$onInit = () => {
       console.log('onInit in classlist')
@@ -17,6 +18,11 @@ angular.module('edtechApp')
     this.selectClass = (e) => {
       this.selectedClass = e;
       console.log('this is selectedClass: ', this.selectedClass)
+      let classLectures = $http.get('/api/lectures', { params: {name: this.selectedClass}})
+      .then((classLectures) => {
+        console.log('these are the lectures:', classLectures)
+        this.lectures = classLectures.data;
+      })
     }
   },
 
@@ -29,6 +35,9 @@ angular.module('edtechApp')
     </div>
     <div ng-if='$ctrl.selectedClass' >
       <h4>SelectedClass is {{$ctrl.selectedClass}}</h4>
+    </div>
+    <div>
+      <lecture lectures='$ctrl.lectures' ></lecture>
     </div>
   </div>
   `

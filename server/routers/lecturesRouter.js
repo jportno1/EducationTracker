@@ -12,7 +12,8 @@ router.route('/')
   })
   .get(async (req, res) => {
     try {
-      let lectures = await lecturesController.getLectures();
+      console.log('this is req.params.name in lectures get: ', req.query.name)
+      let lectures = await lecturesController.getLectures(req.query.name);
       res.status(200).send(lectures)
     } catch (err) {
       res.sendStatus(500);
