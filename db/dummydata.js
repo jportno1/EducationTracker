@@ -40,11 +40,13 @@ lectureData = [
   {name: "childhood development", classId: 4}, 
   {name: "20th century", classId: 5}, 
   {name: "US Government", classId: 6}, 
-  {name: "modern era", classId: 7}
+  {name: "modern era", classId: 7},
+  {name: "chemistry", classId: 1},
 ];
 
 topicData = [
-  {name: "cell division", lectureId: 1},
+  {name: "cell division", lectureId: 1}, 
+  {name: "chemical reations", lectureId: 8},
   {name: "Two Men of Verona", lectureId: 2},
   {name: "squares", lectureId: 3}, 
   {name: "Maslow", lectureId: 4}, 
@@ -63,7 +65,7 @@ quizData = [
   {name: "Are all the sides the same length?", topicId: 3}, 
   {name: "Powers of Congress", topicId: 6}, 
   {name: "Different Trains", topicId: 7}, 
-  {name: "Electric Counterpoint", topicId: 7}
+  {name: "Electric Counterpoint", topicId: 7},
 ];
 
 scoreData = [
