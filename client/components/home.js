@@ -32,7 +32,6 @@ angular.module('edtechApp')
     <button ng-click='$ctrl.showClassList()' >Show Classes</button>
     <button ng-click='$ctrl.showStudentsList()' >Show Students</button>
     <div ng-if='$ctrl.newEntry' >
-      <h1>good job, Jarrett!</h1>
       <entries>not this</entries>
     </div>
     <div ng-if='$ctrl.classList' >
