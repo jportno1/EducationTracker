@@ -15,6 +15,8 @@ angular.module('edtechApp')
     this.teacherName = '';
     this.schoolId = '';
     this.studentName = '';
+    this.className = '';
+    this.teacherId = '';
 
     this.toggleSchools = () => {
       this.schools = !this.schools
@@ -104,6 +106,27 @@ angular.module('edtechApp')
         })
     };
 
+    this.addClass = () => {
+      $http.post('/api/classes', { name: this.className, schoolId: this.schoolId, teacherId: this.teacherId})
+        .then(() => {
+          alert('successfully saved ', this.className)
+        })
+        .catch((err) => {
+          console.log('something went wrong when saving to database')
+        });
+    };
+
+    this.deleteClass = () => {
+      $http.delete('/api/classes', { params: {name: this.className}})
+        .then(() => {
+          alert('successfully deleted ', this.className)
+        })
+        .catch((err) => {
+          console.log('something went wrong when deleting')
+        })
+    };
+
+
   },
 
   template:
@@ -136,10 +159,10 @@ angular.module('edtechApp')
 
     <h5 ng-click='$ctrl.toggleClasses()' >Classes</h5>
     <div ng-if='$ctrl.classes' >
-      Class Name: <input ng-model='className' /> <br> 
-      School Name: <input ng-model='schoolName' /> <br> 
-      Teacher Name: <input ng-model='teacherName' /> <br> 
-      <button>Add</button> <button>Delete</button>
+      Class Name: <input ng-model='$ctrl.className' /> <br> 
+      School ID: <input ng-model='$ctrl.schoolId' /> <br> 
+      Teacher ID: <input ng-model='$ctrl.teacherId' /> <br> 
+      <button ng-click='$ctrl.addClass()' >Add</button> <button ng-click='$ctrl.deleteClass()' >Delete</button>
     </div>
 
     <h5 ng-click='$ctrl.toggleLectures()' >Lectures</h5>
