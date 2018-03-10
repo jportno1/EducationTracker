@@ -12,6 +12,7 @@ router.route('/')
   })
   .get(async (req, res) => {
     try {
+      console.log('this is req.query.name in studentsRouter: ', req.query.name)
       let students = await studentsController.getStudents(req.query.name)
       res.status(200).send(students);
     } catch (err) {

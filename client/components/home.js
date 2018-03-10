@@ -39,7 +39,7 @@ angular.module('edtechApp')
       <classlist></classlist>
     </div>
     <div ng-if='$ctrl.studentsList' >
-      <h2>this will be students list</h2>
+      <students></students>
     </div>
 
   </div>
