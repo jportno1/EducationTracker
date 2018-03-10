@@ -18,8 +18,15 @@ router.route('/')
       res.sendStatus(500);
     }
   })
-  .delete((req, res) => {
-
+  .delete(async (req, res) => {
+    try {
+      console.log('req.query in scores delete: ', req.query)
+      await scoresController.deleteScore(req.query.studentId, req.query.quizId);
+      alert('successfully deleted')
+      res.sendStatus(202);
+    } catch (err) {
+      res.sendStatus(500);
+    }
   })
   .put((req, res) => {
 

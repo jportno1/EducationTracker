@@ -16,5 +16,18 @@ module.exports = {
     } catch (err) {
       throw err;
     }
+  },
+
+  deleteScore: async (studentId, quizId) => {
+    try {
+      School.destroy({
+        where: {
+          studentId: studentId,
+          quizId: quizId
+        }});
+      alert(name, ' was deleted')
+    } catch (err) {
+      throw err;
+    }
   }
 };

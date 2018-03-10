@@ -23,6 +23,9 @@ angular.module('edtechApp')
     this.lectureId = '';
     this.topicId = '';
     this.quizName = '';
+    this.grade = '';
+    this.studentId = '';
+    this.quizId = '';
 
     this.toggleSchools = () => {
       this.schools = !this.schools
@@ -176,7 +179,7 @@ angular.module('edtechApp')
 
 
     this.addQuiz = () => {
-      $http.post('/api/quizzes', { name: this.quizName, lectureId: this.topicId})
+      $http.post('/api/quizzes', { name: this.quizName, topicId: this.topicId})
         .then(() => {
           alert('successfully saved ', this.quizName)
         })
@@ -189,6 +192,27 @@ angular.module('edtechApp')
       $http.delete('/api/quizzes', { params: {name: this.quizName}})
         .then(() => {
           alert('successfully deleted ', this.quizName)
+        })
+        .catch((err) => {
+          console.log('something went wrong when deleting')
+        })
+    };
+
+
+    this.addGrade = () => {
+      $http.post('/api/scores', { grade: this.grade, studentId: this.studentId, quizId: this.quizId})
+        .then(() => {
+          alert('successfully saved ', this.quizName)
+        })
+        .catch((err) => {
+          console.log('something went wrong when saving to database')
+        });
+    };
+
+    this.deleteGrade = () => {
+      $http.delete('/api/scores', { params: {studentId: this.studentId, quizId: this.quizId}})
+        .then(() => {
+          alert('successfully deleted')
         })
         .catch((err) => {
           console.log('something went wrong when deleting')
@@ -256,10 +280,10 @@ angular.module('edtechApp')
 
     <h5 ng-click='$ctrl.toggleGrades()' >Quiz Grades</h5>
     <div ng-if='$ctrl.grades' >
-      Grade(%): <input ng-model='grade' /> <br>
-      Student Name: <input ng-model='studentName' /> <br> 
-      Quiz Name: <input ng-model='quizName' /> <br> 
-      <button>Add</button> <button>Delete</button> 
+      Grade(%): <input ng-model='$ctrl.grade' /> <br>
+      Student ID: <input ng-model='$ctrl.studentId' /> <br> 
+      Quiz ID: <input ng-model='$ctrl.quizId' /> <br> 
+      <button ng-click='$ctrl.addGrade()' >Add</button> <button ng-click='$ctrl.deleteGrade()' >Delete</button> 
     </div>
 
     <h5 ng-click='$ctrl.toggleStudentClass()' >Add/Remove Students to Classes</h5>
