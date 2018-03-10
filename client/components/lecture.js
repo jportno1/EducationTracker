@@ -21,11 +21,14 @@ angular.module('edtechApp')
   template: 
   `
   <div>
-    <h3>this is the lecture component</h3>
+    <h3>Lectures</h3>
+    <h5>Click a lecture to see topics</h5>
     <div ng-repeat='lecture in $ctrl.lectures' >
       <a ng-click='$ctrl.selectLecture(lecture.name)' >{{lecture.name}}</a>
     </div>
-    <topic topics='$ctrl.topics' ></topic>
+    <div ng-if='$ctrl.selectedLecture' >
+      <topic topics='$ctrl.topics' ></topic>
+    </div>
   </div>
   `
 })

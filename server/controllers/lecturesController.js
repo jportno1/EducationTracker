@@ -11,9 +11,7 @@ module.exports = {
   getLectures: async (className) => {
     try {
       let { id } = await Class.findOne({where: {name: className}});
-      console.log('this is id in getLectures: ', id)
       let lectures = await Lecture.findAll({where: {classId: id}});
-      console.log('this is lectures in getLectures: ', lectures);
      
       return lectures;
     } catch (err) {
