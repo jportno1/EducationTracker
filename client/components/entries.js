@@ -19,6 +19,10 @@ angular.module('edtechApp')
     this.teacherId = '';
     this.lectureName = '';
     this.classId = '';
+    this.topicName = '';
+    this.lectureId = '';
+    this.topicId = '';
+    this.quizName = '';
 
     this.toggleSchools = () => {
       this.schools = !this.schools
@@ -149,6 +153,48 @@ angular.module('edtechApp')
         })
     };
 
+
+    this.addTopic = () => {
+      $http.post('/api/topics', { name: this.topicName, lectureId: this.lectureId})
+        .then(() => {
+          alert('successfully saved ', this.topicName)
+        })
+        .catch((err) => {
+          console.log('something went wrong when saving to database')
+        });
+    };
+
+    this.deleteTopic = () => {
+      $http.delete('/api/topics', { params: {name: this.topicName}})
+        .then(() => {
+          alert('successfully deleted ', this.topicName)
+        })
+        .catch((err) => {
+          console.log('something went wrong when deleting')
+        })
+    };
+
+
+    this.addQuiz = () => {
+      $http.post('/api/quizzes', { name: this.quizName, lectureId: this.topicId})
+        .then(() => {
+          alert('successfully saved ', this.quizName)
+        })
+        .catch((err) => {
+          console.log('something went wrong when saving to database')
+        });
+    };
+
+    this.deleteQuiz = () => {
+      $http.delete('/api/quizzes', { params: {name: this.quizName}})
+        .then(() => {
+          alert('successfully deleted ', this.quizName)
+        })
+        .catch((err) => {
+          console.log('something went wrong when deleting')
+        })
+    };
+
   },
 
   template:
@@ -196,16 +242,16 @@ angular.module('edtechApp')
 
     <h5 ng-click='$ctrl.toggleTopics()' >Topics</h5>
     <div ng-if='$ctrl.topics' >
-      Topic Name: <input ng-model='topicName' /> <br> 
-      Lecture Name: <input ng-model='lectureName' /> <br> 
+      Topic Name: <input ng-model='$ctrl.topicName' /> <br> 
+      Lecture ID: <input ng-model='$ctrl.lectureId' /> <br> 
       <button ng-click='$ctrl.addTopic()' >Add</button> <button ng-click='$ctrl.deleteTopic()' >Delete</button>    
     </div>
 
     <h5 ng-click='$ctrl.toggleQuizzes()' >Quizzes</h5>
     <div ng-if='$ctrl.quizzes' >
-      Quiz Name: <input ng-model='quizName' /> <br> 
-      Topic Name: <input ng-model='topicName' /> <br> 
-      <button>Add</button> <button>Delete</button> 
+      Quiz Name: <input ng-model='$ctrl.quizName' /> <br> 
+      Topic ID: <input ng-model='$ctrl.topicId' /> <br> 
+      <button ng-click='$ctrl.addQuiz()' >Add</button> <button ng-click='$ctrl.deleteQuiz()' >Delete</button> 
     </div>
 
     <h5 ng-click='$ctrl.toggleGrades()' >Quiz Grades</h5>
