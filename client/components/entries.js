@@ -1,6 +1,7 @@
 angular.module('edtechApp')
 .component('entries', {
-  controller: function() {
+  controller: function($http) {
+    let ctrl = this;
     this.schools = false;
     this.teachers = false;
     this.students = false;
@@ -10,6 +11,7 @@ angular.module('edtechApp')
     this.quizzes = false;
     this.grades = false;
     this.studentClass = false;
+    this.schoolName = '';
 
     this.toggleSchools = () => {
       this.schools = !this.schools
@@ -38,6 +40,16 @@ angular.module('edtechApp')
     this.toggleStudentClass = () => {
       this.studentClass = !this.studentClass
     };
+
+    this.addSchool = () => {
+      $http.post('/api/schools', { name: this.schoolName})
+        .then(() => {
+          alert('successfully saved ', this.schoolName)
+        })
+        .catch((err) => {
+          console.log('something went wrong when saving to database')
+        });
+    };
   },
 
   template:
@@ -45,17 +57,17 @@ angular.module('edtechApp')
   <div>
 
     <h1>entries!</h1>
-
+    <pre>{{$ctrl.schoolName}}</pre>
     <h5 ng-click='$ctrl.toggleSchools()' >Schools</h5>
     <div ng-if='$ctrl.schools' >
-      School Name: <input ng-model='schoolName' /> <br>
-      <button>Add</button> <button>Delete</button>
+      School Name: <input ng-model='$ctrl.schoolName' /> <br>
+      <button ng-click='$ctrl.addSchool()' >Add</button> <button>Delete</button>
     </div>
 
     <h5 ng-click='$ctrl.toggleTeachers()' >Teachers</h5>
     <div ng-if='$ctrl.teachers' >
       Teacher Name: <input ng-model='teacherName' /> <br> 
-      School Name: <input ng-model='schoolName' /> <br> 
+      School Name: <input ng-model='$ctrl.schoolName' /> <br> 
       <button>Add</button> <button>Delete</button>
     </div>
 
