@@ -219,6 +219,26 @@ angular.module('edtechApp')
         })
     };
 
+    this.addStudentToClass = () => {
+      $http.post('/api/studentClasses', { studentId: this.studentId, classId: this.classId})
+        .then(() => {
+          alert('successfully saved')
+        })
+        .catch((err) => {
+          console.log('something went wrong when saving to database')
+        });
+    };
+
+    this.deleteStudentFromClass = () => {
+      $http.delete('/api/studentClasses', { params: {studentId: this.studentId, classId: this.classId}})
+        .then(() => {
+          alert('successfully deleted')
+        })
+        .catch((err) => {
+          console.log('something went wrong when deleting')
+        })
+    };
+
   },
 
   template:
@@ -288,9 +308,9 @@ angular.module('edtechApp')
 
     <h5 ng-click='$ctrl.toggleStudentClass()' >Add/Remove Students to Classes</h5>
     <div ng-if='$ctrl.studentClass' >
-      Student Name: <input ng-model='studentName' /> <br> 
-      Class Name: <input ng-model='className' /> <br> 
-      <button>Add</button> <button>Delete</button> 
+      Student ID: <input ng-model='$ctrl.studentId' /> <br> 
+      Class ID: <input ng-model='$ctrl.classId' /> <br> 
+      <button ng-click='$ctrl.addStudentToClass()' >Add</button> <button ng-click='$ctrl.deleteStudentFromClass()' >Delete</button> 
     </div>
 
   </div>
