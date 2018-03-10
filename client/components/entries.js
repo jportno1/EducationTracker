@@ -17,6 +17,8 @@ angular.module('edtechApp')
     this.studentName = '';
     this.className = '';
     this.teacherId = '';
+    this.lectureName = '';
+    this.classId = '';
 
     this.toggleSchools = () => {
       this.schools = !this.schools
@@ -127,6 +129,26 @@ angular.module('edtechApp')
     };
 
 
+    this.addLecture = () => {
+      $http.post('/api/lectures', { name: this.lectureName, classId: this.classId})
+        .then(() => {
+          alert('successfully saved ', this.lectureName)
+        })
+        .catch((err) => {
+          console.log('something went wrong when saving to database')
+        });
+    };
+
+    this.deleteLecture = () => {
+      $http.delete('/api/lectures', { params: {name: this.lectureName}})
+        .then(() => {
+          alert('successfully deleted ', this.lectureName)
+        })
+        .catch((err) => {
+          console.log('something went wrong when deleting')
+        })
+    };
+
   },
 
   template:
@@ -167,16 +189,16 @@ angular.module('edtechApp')
 
     <h5 ng-click='$ctrl.toggleLectures()' >Lectures</h5>
     <div ng-if='$ctrl.lectures' >
-      Lecture Name: <input ng-model='lectureName' /> <br> 
-      Class Name: <input ng-model='className' /> <br> 
-      <button>Add</button> <button>Delete</button>
+      Lecture Name: <input ng-model='$ctrl.lectureName' /> <br> 
+      Class ID: <input ng-model='$ctrl.classId' /> <br> 
+      <button ng-click='$ctrl.addLecture()' >Add</button> <button ng-click='$ctrl.deleteLecture()' >Delete</button>
     </div>
 
     <h5 ng-click='$ctrl.toggleTopics()' >Topics</h5>
     <div ng-if='$ctrl.topics' >
       Topic Name: <input ng-model='topicName' /> <br> 
       Lecture Name: <input ng-model='lectureName' /> <br> 
-      <button>Add</button> <button>Delete</button>    
+      <button ng-click='$ctrl.addTopic()' >Add</button> <button ng-click='$ctrl.deleteTopic()' >Delete</button>    
     </div>
 
     <h5 ng-click='$ctrl.toggleQuizzes()' >Quizzes</h5>
